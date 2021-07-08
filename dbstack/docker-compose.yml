@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  mongodb:
+    image : 'mongo'
+    container_name: 'mongodb'
+    environment:
+      - MONGO_INITDB_DATABASE=mongotest
+      - MONGO_INITDB_ROOT_USERNAME=mongo
+      - MONGO_INITDB_ROOT_PASSWORD=mongo_test
+    volumes:
+      - /home/egemeric/mongodb/database:/data/db
+    ports:
+      - '27017:27017'
+    restart: unless-stopped
+  postgres:
+    image: 'postgres'
+    container_name: 'postgresql'
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgretest
+    ports:
+      - '5432:5432'
+    restart: unless-stopped
+  adminer:
+    image: 'adminer'
+    container_name: 'adminerconsole'
+    ports:
+      - '8088:8080'
+    restart: unless-stopped
